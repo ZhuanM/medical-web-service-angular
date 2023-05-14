@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BaseComponent } from '../shared/base.component';
+import { BaseComponent } from '../base.component';
 import * as LoaderSelectors from '../loader/store/loader.selectors';
-import { AppState } from '../shared/models/app-state.interface';
+import { AppState } from '../models/app-state.interface';
 
 @Component({
   selector: 'app-loader',

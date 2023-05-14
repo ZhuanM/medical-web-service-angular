@@ -56,11 +56,11 @@ body {
 
 // CHECK BUTTONS
 .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background-color: #25992e !important;
+  background-color: #cd3e3e !important;
 }
 
 .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
-  background: #25992e !important;
+  background: #cd3e3e !important;
 }
 
 .mat-checkbox-layout .mat-checkbox-label {
@@ -69,7 +69,7 @@ body {
 
 // MENU ITEMS
 .mat-menu-item:hover:not([disabled]) {
-  background: #25992e !important;
+  background: #cd3e3e !important;
   color: white !important;
   // font-weight: 600 !important;
 }
@@ -99,34 +99,34 @@ app-login {
 
 // RADIO BUTTONS
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: #25992e;
+  border-color: #cd3e3e;
 }
 
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple) {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 // PROGRESS SPINNER
 .mat-progress-spinner circle,
 .mat-spinner circle {
-  stroke: #25992e;
+  stroke: #cd3e3e;
 }
 
 // PROGRESS BAR
 .mat-progress-bar-fill:after {
-  background-color: #25992e !important;
+  background-color: #cd3e3e !important;
 }
 
 .mat-progress-bar-buffer {
@@ -135,15 +135,15 @@ app-login {
 
 // BUTTONS & ICONS
 .mat-flat-button.mat-accent {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 .mat-icon-button.mat-accent {
-  color: #25992e;
+  color: #cd3e3e;
 }
 
 .mat-icon.mat-accent {
-  color: #25992e;
+  color: #cd3e3e;
 }
 
 // SIDENAV LIST
@@ -155,7 +155,7 @@ app-login {
 .mat-action-list .mat-list-item:hover,
 .mat-action-list .mat-list-item:focus,
 .mat-action-list .mat-list-item:active {
-  background-color: #25992e !important;
+  background-color: #cd3e3e !important;
   border-radius: 4px;
 }
 
@@ -215,7 +215,7 @@ mat-sidenav {
 // TABS
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 // SnackBar styles
@@ -244,7 +244,7 @@ mat-sidenav {
 }
 
 .green-nbu-color {
-  color: #25992e;
+  color: #cd3e3e;
 }
 
 .dark-green-nbu-color {
@@ -361,7 +361,7 @@ button {
 }
 
 .green-nbu-button {
-  background-color: #25992e;
+  background-color: #cd3e3e;
 }
 
 .grey-button {
@@ -433,16 +433,16 @@ button {
 
 //SYNCFUSION DATA TABLE
 // .e-pager .e-currentitem {
-//   background-color: #25992e !important;
+//   background-color: #cd3e3e !important;
 // }
 
 // .e-input-group:not(.e-float-icon-left):not(.e-float-input)::before,
 // .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before,
 // .e-input-group:not(.e-float-icon-left):not(.e-float-input)::after,
 // .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after {
-//   background: #25992e !important;
+//   background: #cd3e3e !important;
 // }
 
 // .e-datetime-wrapper .e-input-group-icon.e-icons.e-active {
-//   color: #25992e !important;
+//   color: #cd3e3e !important;
 // }
