@@ -59,6 +59,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { AuthEffects } from './auth/store/auth.effects';
+import { HeaderEffects } from './header/store/header.effects';
+import { AppSnackbarComponent } from './shared/snackbars/app-snackbar/app-snackbar.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'fill'
@@ -74,6 +77,7 @@ const appearance: MatFormFieldDefaultOptions = {
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    AppSnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +88,8 @@ const appearance: MatFormFieldDefaultOptions = {
       // logOnly: environment.production, // Restrict extension to log-only mode
      }),
     EffectsModule.forRoot([
-      // TODO ADD EFFECTS HERE
+      AuthEffects,
+      HeaderEffects,
     ]),
     StoreRouterConnectingModule.forRoot(),
     AppRoutingModule,

@@ -2,11 +2,8 @@ import { environment } from 'src/environments/environment';
 
 export const apiUrls = {
   // Authentication
-  loginUrl: environment.apiBaseUrl + 'authenticate',
+  loginUrl: environment.apiBaseUrl + 'auth/token',
   registerUrl: environment.apiBaseUrl + 'api/user/register',
-  // Users
-  // usersUrl: environment.apiBaseUrl + 'api/user', // ROOT
-  // getAllUsersUrl: environment.apiBaseUrl + 'api/user/all', // ROOT
   // Patient
   patientUrl: environment.apiBaseUrl + 'patient', // ROOT
   getPatientByIdUrl: environment.apiBaseUrl + 'patient', // /{patientId} (GET)

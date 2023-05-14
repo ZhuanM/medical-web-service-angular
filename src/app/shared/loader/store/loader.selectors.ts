@@ -5,6 +5,6 @@ import { State } from "./loader.reducer";
 const loaderSelector = createFeatureSelector<AppState, State>('loader');
 
 export const loading = createSelector(
-    loaderSelector,
-    (state: State) => state.loading
+  loaderSelector,
+  (state: State) => state.loading
 )

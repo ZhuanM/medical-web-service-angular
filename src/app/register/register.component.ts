@@ -9,6 +9,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppState } from '../shared/models/app-state.interface';
+import { Doctor } from '../shared/models/doctor.interface';
 
 @Component({
   selector: 'app-register',
@@ -16,15 +17,15 @@ import { AppState } from '../shared/models/app-state.interface';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends BaseComponent {
-  readonly specializations$: Observable<Array<any>> = this.store.pipe(select(AuthSelectors.specializations), takeUntil(this.destroyed$));
+  readonly specializations$: Observable<Array<string>> = this.store.pipe(select(AuthSelectors.specializations), takeUntil(this.destroyed$));
+  readonly doctors$: Observable<Array<Doctor>> = this.store.pipe(select(AuthSelectors.doctors), takeUntil(this.destroyed$));
 
   public specializations: Array<string> = [];
+  public doctors: Array<Doctor> = [];
 
   public hideRegisterPassword: boolean = true;
   public hideRegisterRepeatPassword: boolean = true;
 
-  public classes: Array<string> = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ];
-  
   public registerForm = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
     username: new UntypedFormControl('', [Validators.required]),
@@ -32,10 +33,10 @@ export class RegisterComponent extends BaseComponent {
       password: new UntypedFormControl('', [Validators.required]),
       repeatPassword: new UntypedFormControl('', [Validators.required]),
     }, this.passwordConfirming),
-    role: new UntypedFormControl(''),
+    role: new UntypedFormControl('', [Validators.required]),
     uniqueUserNumber: new UntypedFormControl('', [Validators.required]),
     specialization: new UntypedFormControl(''),
-    gp: new UntypedFormControl('', [Validators.required]),
+    gp: new UntypedFormControl(''),
   });
   
   constructor(
@@ -46,45 +47,50 @@ export class RegisterComponent extends BaseComponent {
 
     this.store.dispatch(appLoading({ loading: true }));
     this.store.dispatch(AuthActions.getSpecializations());
+    this.store.dispatch(AuthActions.getDoctors());
 
     this.specializations$.pipe(takeUntil(this.destroyed$)).subscribe(specializations => {
       if (specializations) {
         this.specializations = specializations;
       }
     });
+
+    this.doctors$.pipe(takeUntil(this.destroyed$)).subscribe(doctors => {
+      if (doctors) {
+        this.doctors = doctors;
+      }
+    });
   }
 
   ngOnInit() {
-    this.registerForm.get('role').setValue('STUDENT');
+    this.registerForm.get('role').setValue('PATIENT');
   }
 
   public onRadioChange(event: MatRadioChange) {
-    if (event.value == 'STUDENT') {
-      this.registerForm.get('school').clearValidators();
-      this.registerForm.get('school').setValue('');
-      this.registerForm.get('school').markAsPristine();
-      this.registerForm.get('school').markAsUntouched();
+    if (event.value == 'PATIENT') {
+      this.registerForm.get('specialization').clearValidators();
+      this.registerForm.get('specialization').setValue('');
+      this.registerForm.get('specialization').markAsPristine();
+      this.registerForm.get('specialization').markAsUntouched();
 
-      this.registerForm.get('school').setValidators(Validators.required);
+      this.registerForm.get('gp').clearValidators();
+      this.registerForm.get('gp').setValue('');
+      this.registerForm.get('gp').markAsPristine();
+      this.registerForm.get('gp').markAsUntouched();
 
-      this.registerForm.get('class').clearValidators();
-      this.registerForm.get('class').setValue('');
-      this.registerForm.get('class').markAsPristine();
-      this.registerForm.get('class').markAsUntouched();
+      this.registerForm.get('gp').setValidators(Validators.required);
+    } else if (event.value == 'DOCTOR') {
+      this.registerForm.get('gp').clearValidators();
+      this.registerForm.get('gp').setValue('');
+      this.registerForm.get('gp').markAsPristine();
+      this.registerForm.get('gp').markAsUntouched();
 
-      this.registerForm.get('class').setValidators(Validators.required);
-    } else if (event.value == 'TEACHER') {
-      this.registerForm.get('class').clearValidators();
-      this.registerForm.get('class').setValue('');
-      this.registerForm.get('class').markAsPristine();
-      this.registerForm.get('class').markAsUntouched();
+      this.registerForm.get('specialization').clearValidators();
+      this.registerForm.get('specialization').setValue('');
+      this.registerForm.get('specialization').markAsPristine();
+      this.registerForm.get('specialization').markAsUntouched();
 
-      this.registerForm.get('school').clearValidators();
-      this.registerForm.get('school').setValue('');
-      this.registerForm.get('school').markAsPristine();
-      this.registerForm.get('school').markAsUntouched();
-
-      this.registerForm.get('school').setValidators(Validators.required);
+      this.registerForm.get('specialization').setValidators(Validators.required);
     }
 
     this.cdr.detectChanges();
@@ -93,17 +99,28 @@ export class RegisterComponent extends BaseComponent {
   public onSubmit() {
     if (this.registerForm.valid) {
       this.store.dispatch(appLoading({ loading: true }));
-      this.store.dispatch(AuthActions.register(
-        {
-          name: this.registerForm.get('name').value,
-          username: this.registerForm.get('username').value,
-          password: this.registerForm.get('passwords')?.get('password').value,
-          role: this.registerForm.get('role').value,
-          uniqueUserNumber: this.registerForm.get('uniqueUserNumber').value,
-          specialization: this.registerForm.get('specialization').value,
-          gp: this.registerForm.get('gp').value
-        }
-      ));
+      const role: string = this.registerForm.get('role').value;
+      if (role == "PATIENT") {
+        this.store.dispatch(AuthActions.registerPatient(
+          {
+            name: this.registerForm.get('name').value,
+            username: this.registerForm.get('username').value,
+            password: this.registerForm.get('passwords')?.get('password').value,
+            uniqueCitizenNumber: this.registerForm.get('uniqueUserNumber').value,
+            gp: this.registerForm.get('gp').value
+          }
+        ));
+      } else if (role == "DOCTOR") {
+        this.store.dispatch(AuthActions.registerDoctor(
+          {
+            name: this.registerForm.get('name').value,
+            username: this.registerForm.get('username').value,
+            password: this.registerForm.get('passwords')?.get('password').value,
+            uniqueDoctorNumber: this.registerForm.get('uniqueUserNumber').value,
+            specialization: this.registerForm.get('specialization').value
+          }
+        ));
+      }
     }
   }
 
@@ -114,22 +131,13 @@ export class RegisterComponent extends BaseComponent {
   }
   
   // ERRORS
-  public getRegisterFirstNameErrorMessage() {
-    let firstName = this.registerForm.get('firstName');
-    if (firstName.hasError('required')) {
+  public getRegisterNameErrorMessage() {
+    let name = this.registerForm.get('name');
+    if (name.hasError('required')) {
       return 'Please enter your first name';
     }
 
-    return firstName.hasError('firstName') ? 'Please enter a valid first name' : '';
-  }
-
-  public getRegisterLastNameErrorMessage() {
-    let lastName = this.registerForm.get('lastName');
-    if (lastName.hasError('required')) {
-      return 'Please enter your last name';
-    }
-
-    return lastName.hasError('lastName') ? 'Please enter a valid last name' : '';
+    return name.hasError('name') ? 'Please enter a valid name' : '';
   }
 
   public getRegisterUsernameErrorMessage() {
@@ -141,13 +149,13 @@ export class RegisterComponent extends BaseComponent {
     return username.hasError('username') ? 'Please enter a valid username' : '';
   }
 
-  public getRegisterEmailErrorMessage() {
-    let email = this.registerForm.get('email');
-    if (email.hasError('required')) {
-      return 'Please enter your email';
+  public getRegisterUniqueNumberErrorMessage() {
+    let uniqueUserNumber = this.registerForm.get('uniqueUserNumber');
+    if (uniqueUserNumber.hasError('uniqueUserNumber')) {
+      return 'Please enter your unique number';
     }
 
-    return email.hasError('email') ? 'Please enter a valid email' : '';
+    return uniqueUserNumber.hasError('uniqueUserNumber') ? 'Please enter a valid unique number' : '';
   }
 
   public getPasswordErrorMessage() {

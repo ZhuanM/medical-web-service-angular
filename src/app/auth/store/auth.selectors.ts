@@ -23,3 +23,8 @@ export const specializations = createSelector(
   authFeatureSelector,
   (state: State) => state.specializations
 );
+
+export const doctors = createSelector(
+  authFeatureSelector,
+  (state: State) => state.doctors
+);

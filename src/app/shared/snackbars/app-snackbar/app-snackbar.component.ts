@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
-import { MessageType } from '../../../models/enums/message-type.enum';
+import { MessageType } from '../../models/message-type.enum';
 
 @Component({
   selector: 'app-snackbar',

@@ -27,7 +27,7 @@ export class HeaderComponent extends BaseComponent {
   readonly user$: Observable<User> = this.store.pipe(select(user), takeUntil(this.destroyed$));
   
   public role: string;
-  public username: string;
+  public name: string;
   
   public isMobile: boolean = false;
 
@@ -41,13 +41,13 @@ export class HeaderComponent extends BaseComponent {
 
     this.user$.pipe(takeUntil(this.destroyed$)).subscribe(user => {
       this.role = localStorage.getItem('role');
-      this.username = localStorage.getItem('username');
+      this.name = localStorage.getItem('name');
     });
 
     this.subscription.add(this.actionsSubject$.pipe(filter((action) => action.type === '[Auth Component] Logout Success'))
       .subscribe(() => {
         this.role = localStorage.getItem('role');
-        this.username = localStorage.getItem('username');
+        this.name = localStorage.getItem('name');
       }));
   }
 

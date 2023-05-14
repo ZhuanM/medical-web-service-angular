@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Doctor } from 'src/app/shared/models/doctor.interface';
 import { User } from 'src/app/shared/models/user.interface';
 
 export const login = createAction(
@@ -9,18 +10,27 @@ export const login = createAction(
   }>()
 );
 
-export const register = createAction(
-  '[Auth Component] Register',
+export const registerPatient = createAction(
+  '[Auth Component] Register Patient',
   props<{
     name: string,
     username: string,
     password: string,
-    role: string,
-    uniqueUserNumber: string,
-    specialization: string,
+    uniqueCitizenNumber: string,
     gp: {
       userId: string
     }
+  }>()
+);
+
+export const registerDoctor = createAction(
+  '[Auth Component] Register Doctor',
+  props<{
+    name: string,
+    username: string,
+    password: string,
+    uniqueDoctorNumber: string,
+    specialization: string,
   }>()
 );
 
@@ -62,6 +72,17 @@ export const getSpecializationsSuccess = createAction(
   '[Auth Component] Get Specializations Success',
   props<{
     specializations: Array<string>
+  }>()
+);
+
+export const getDoctors = createAction(
+  '[Auth Component] Get Doctors'
+);
+
+export const getDoctorsSuccess = createAction(
+  '[Auth Component] Get Doctors Success',
+  props<{
+    doctors: Array<Doctor>
   }>()
 );
 

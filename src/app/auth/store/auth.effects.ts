@@ -48,7 +48,7 @@ export class AuthEffects {
       return this.authService.getUser(action.role, action.id)
         .pipe(
           map(response => {
-            localStorage.setItem('username', response.username);
+            localStorage.setItem('name', response.username);
 
             this.appService.openSnackBar("Successfully logged in!", MessageType.Success);
 
@@ -73,7 +73,7 @@ export class AuthEffects {
 
         // USER
         localStorage.removeItem('role');
-        localStorage.removeItem('username');
+        localStorage.removeItem('name');
         localStorage.removeItem('id');
 
         return AuthActions.logoutSuccess();
@@ -81,21 +81,46 @@ export class AuthEffects {
     )
   );
 
-  authRegister$ = createEffect(() =>
+  authRegisterPatient$ = createEffect(() =>
   this.actions$.pipe(
-    ofType(AuthActions.register),
+    ofType(AuthActions.registerPatient),
     switchMap(action => {
       const username = action.username;
       const password = action.password;
       
-      return this.authService.register(
+      return this.authService.registerPatient(
         action.name,
         action.username,
         action.password,
-        action.role,
-        action.uniqueUserNumber,
-        action.specialization,
+        action.uniqueCitizenNumber,
         action.gp)
+        .pipe(
+          map(authData => {
+            return AuthActions.login({username: username, password: password})
+          }),
+          catchError((errorRes: HttpErrorResponse) => {
+            return of(AuthActions.authFail(
+              { errorMessage: 'Invalid email and/or password' }
+            ));
+          })
+        );
+      })
+    )
+  );
+
+  authRegisterDoctor$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuthActions.registerDoctor),
+    switchMap(action => {
+      const username = action.username;
+      const password = action.password;
+      
+      return this.authService.registerDoctor(
+        action.name,
+        action.username,
+        action.password,
+        action.uniqueDoctorNumber,
+        action.specialization)
         .pipe(
           map(authData => {
             return AuthActions.login({username: username, password: password})
@@ -118,6 +143,20 @@ export class AuthEffects {
         .pipe(
           map(data => {
             return AuthActions.getSpecializationsSuccess({specializations: data})
+          })
+        );
+      })
+    )
+  );
+
+  getDoctors$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuthActions.getDoctors),
+    switchMap(action => {
+      return this.authService.getDoctors()
+        .pipe(
+          map(data => {
+            return AuthActions.getDoctorsSuccess({doctors: data})
           })
         );
       })

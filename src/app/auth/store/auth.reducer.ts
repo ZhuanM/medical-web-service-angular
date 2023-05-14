@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { User } from '../../shared/models/user.interface';
 import * as AuthActions from './auth.actions';
+import { Doctor } from 'src/app/shared/models/doctor.interface';
 
 export interface State {
   accessToken: string;
@@ -9,6 +10,7 @@ export interface State {
   user: User;
   id: number;
   specializations: Array<string>;
+  doctors: Array<Doctor>;
 }
 
 export const initialState: State = {
@@ -18,6 +20,7 @@ export const initialState: State = {
   user: null,
   id: null,
   specializations: null,
+  doctors: null,
 }
 
 const _authReducer = createReducer(
@@ -82,6 +85,14 @@ const _authReducer = createReducer(
     (state, action) => ({
       ...state,
       specializations: action.specializations,
+    })
+  ),
+
+  on(
+    AuthActions.getDoctorsSuccess,
+    (state, action) => ({
+      ...state,
+      doctors: action.doctors,
     })
   ),
 );

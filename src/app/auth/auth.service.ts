@@ -23,44 +23,50 @@ export class AuthService {
     )
   }
 
-  register(
+  registerPatient(
     name: string,
     username: string,
     password: string,
-    role: string,
-    uniqueUserNumber: string,
-    specialization: string,
+    uniqueCitizenNumber: string,
     gp: {
       userId: string
     }
     ) {
-    if (role === 'PATIENT') {
-      return this.http.post<any>(
-        apiUrls.patientUrl,
-        {
-          "name": name,
-          "username": username,
-          "password": password,
-          "ucn": uniqueUserNumber,
-          "gp": {
-            "userId": gp?.userId
-          }
+    return this.http.post<any>(
+      apiUrls.patientUrl,
+      {
+        "name": name,
+        "username": username,
+        "password": password,
+        // TODO change "ucn" to "uniqueCitizenNumber" in back-end
+        "ucn": uniqueCitizenNumber,
+        // "uniqueCitizenNumber": uniqueCitizenNumber,
+        "gp": {
+          "userId": gp?.userId
         }
-      )
-    } else if (role === 'DOCTOR') {
-      return this.http.post<any>(
-        apiUrls.doctorUrl,
-        {
-          "name": name,
-          "username": username,
-          "password": password,
-          "npi": uniqueUserNumber,
-          "specialty": specialization
-        }
-      )
-    } else {
-      return;
-    }
+      }
+    )
+  }
+
+  registerDoctor(
+    name: string,
+    username: string,
+    password: string,
+    uniqueDoctorNumber: string,
+    specialization: string
+  ) {
+    return this.http.post<any>(
+      apiUrls.doctorUrl,
+      {
+        "name": name,
+        "username": username,
+        "password": password,
+        // TODO change "npi" to "uniqueDoctorNumber" in back-end
+        "npi": uniqueDoctorNumber,
+        // "uniqueDoctorNumber": uniqueDoctorNumber,
+        "specialty": specialization
+      }
+    )
   }
 
   getUser(role: string, id: number) {
@@ -78,6 +84,12 @@ export class AuthService {
   getSpecializations() {
     return this.http.get<any>(
       apiUrls.getSpecializationsUrl
+    )
+  }
+
+  getDoctors() {
+    return this.http.get<any>(
+      apiUrls.doctorUrl
     )
   }
 }
