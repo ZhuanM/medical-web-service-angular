@@ -1,0 +1,25 @@
+<div class="header-container row align-items-center mx-0">
+  <div class="col-auto h-100 d-flex justify-content-center align-items-center pr-0" *ngIf="isMobile">
+    <button class="white-color menu-icon" mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div class="col-auto pointer h-100 d-flex align-items-center pr-0 unselectable" routerLink="/home" (click)="redirectToHome()">
+    <img src="../../assets/logo/nbu-classbook-white.png" alt="NBU Classbook Logo">
+  </div>
+  <div *ngIf="username" class="col name-text font-monsterrat h-100 white-color d-flex justify-content-end align-items-center pl-0">
+    Hello, {{ username }}
+  </div>
+  <div *ngIf="role" class="col-auto h-100 d-flex justify-content-end align-items-center pl-0">
+    <div class="row h-100">
+      <div class="col-auto white-color d-flex align-items-center pointer settings-icon d-flex align-items-center p-0 ml-4">
+        <button mat-icon-button class="settings-button" [matMenuTriggerFor]="settings" [disableRipple]="true" aria-label="Settings">
+          <mat-icon>manage_accounts</mat-icon>
+        </button>
+        <mat-menu #settings="matMenu">
+          <button mat-menu-item (click)="onLogout()">Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>

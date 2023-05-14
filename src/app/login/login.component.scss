@@ -1,0 +1,65 @@
+.login-logo {
+  min-width: 70%;
+  width: 40vmin;
+}
+
+.main-title-text {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.under-main-text {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.login-button-text {
+  line-height: 48px;
+}
+
+.password-hide-icon {
+  color: #6f6f70;
+}
+
+.login-error-wrapper {
+  border: 2px solid #f44336;
+  border-radius: 4px;
+  background-color: #f7bcbc;
+  color: #995353;
+  height: 48px;
+  font-size: 1.4vmin;
+}
+
+@media (max-width: 1547px) {
+  .login-error-wrapper {
+    font-size: 1.3vmin;
+  }
+}
+
+@media (max-width: 1388px) {
+  .login-error-wrapper {
+    font-size: 1.1vmin;
+  }
+}
+
+@media (max-width: 1230px) {
+  .login-error-wrapper {
+    font-size: 1vmin;
+  }
+}
+
+@media (max-width: 1199px) {
+  .login-error-wrapper {
+    font-size: 1.5vmin;
+  }
+}
+
+@media (max-width: 680px) {
+  .login-error-wrapper {
+    font-size: 1.9vmin;
+  }
+}
+
+@media (max-width: 450px) {
+  .login-error-wrapper {
+    font-size: 2.1vmin;
+  }
+}

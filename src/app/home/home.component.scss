@@ -1,0 +1,93 @@
+.carousel-custom-img {
+  height: 500px;
+  min-width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &.first {
+    background-image: url("../../assets/images/dudley_opm-01.png");
+  }
+
+  &.second {
+    background-image: url("../../assets/images/a-plusplus.jpg");
+  }
+
+  &.third {
+    background-image: url("../../assets/images/image-asset.jpeg");
+  }
+}
+
+.carousel-width {
+  width: 75%;
+}
+
+.carousel-inner {
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.87);
+}
+
+.carousel-item {
+  // DISABLE ANIMATIONS FOR WEBSITE SPEED
+  // transition: none !important;
+}
+
+.carousel-caption {
+  font-weight: 500;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.caption-title {
+  font-size: 52px;
+  font-family: "Montserrat";
+}
+
+.caption-text {
+  font-size: 38px;
+  font-family: "Exo 2";
+}
+
+@media only screen and (max-width: 1000px) {
+  .caption-title {
+    font-size: 40px;
+  }
+
+  .caption-text {
+    font-size: 28px;
+  }
+
+  .carousel-width {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .caption-title {
+    font-size: 34px;
+  }
+
+  .caption-text {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 435px) {
+  .caption-title {
+    font-size: 30px;
+  }
+
+  .caption-text {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .caption-title {
+    font-size: 28px;
+  }
+
+  .caption-text {
+    font-size: 18px;
+  }
+}

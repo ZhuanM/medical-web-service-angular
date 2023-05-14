@@ -1,0 +1,51 @@
+.content-container {
+  padding: 7vmin;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #E5E5E5;
+}
+
+mat-sidenav {
+  width: 230px;
+  background-color: white;
+  padding: 16px;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.list-left-margin {
+  margin-left: 15px;
+}
+
+.top-list-border {
+  border-top: 1px solid #E5E5E5;
+}
+
+.nav-list-padding {
+  padding: 12px 8px 12px 8px !important;
+}
+
+.mat-list-height {
+  height: 33px !important;
+  margin-bottom: 5px;
+}
+
+.list-icon {
+  padding-left: 0px !important;
+}
+
+.active-item {
+  background-color: #25992e !important;
+  border-radius: 4px;
+}
+
+.active-item mat-icon {
+  color: white !important;
+}
+
+.active-item .mat-list-text {
+  color: white !important;
+}

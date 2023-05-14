@@ -1,0 +1,47 @@
+<div class="row justify-content-center no-gutters h-100 w-100">
+  <div class="col-12 col-xl-5">
+    <div class="row h-100 m-0 justify-content-center align-items-center">
+      <div class="col mb-5">
+        <div class="d-flex justify-content-center unselectable mb-4">
+          <img class="login-logo" src="../../assets/logo/orange_logo_transparent.png" alt="NBU Medical Service Logo">
+        </div>
+        <div class="fs-48 main-title-text mb-3">
+          Login
+        </div>
+        <div class="fs-16 under-main-text sm-spaced-text mb-5">
+          Login to access your account
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <mat-form-field class="w-100">
+              <mat-label>Username</mat-label>
+              <input type="username" matInput formControlName="username" required>
+              <mat-error>{{getLoginUsernameErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="mb-3">
+            <mat-form-field class="w-100">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hideLoginPassword ? 'password' : 'text'" formControlName="password" required>
+              <mat-icon class="password-hide-icon pointer unselectable" matSuffix (click)="hideLoginPassword = !hideLoginPassword">
+                {{hideLoginPassword ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+              <mat-error>{{getLoginPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button class="w-100 green-nbu-button white-color text-uppercase lg-spaced-text login-button-text"
+           [disabled]="!loginForm.valid" type="submit">
+            Login
+          </button>
+
+          <div *ngIf="(authError$ | async)" class="w-100 lg-spaced-text login-error-wrapper p-2 d-flex justify-content-center align-items-center mt-4">
+            Incorrect Username Address and/or Password!
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

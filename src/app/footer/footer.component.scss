@@ -1,0 +1,36 @@
+footer {
+  background-color: #25992e;
+  overflow: auto;
+  color: #fff;
+}
+
+a {
+  color: inherit;
+}
+
+.copyright-text {
+  // font-family: 'Petit Formal Script', cursive;
+  font-size: 15px;
+}
+
+.privacy-text {
+  color: #bab9b9;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.social-media-icons:hover {
+  opacity: 0.5;
+}
+
+.social-media-icons {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 400px) {
+  .copyright-text,
+  .privacy-text {
+    font-size: 11px;
+  }
+}

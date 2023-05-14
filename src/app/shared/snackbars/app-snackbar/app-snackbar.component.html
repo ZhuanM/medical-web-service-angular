@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-auto d-flex align-items-center px-3">
+    <mat-icon class="material-symbols-outlined unselectable"
+     [ngStyle]="{'color': icon == 'warning' ? '#4c4c4c' : (icon == 'error' || icon == 'success') ? 'white' : ''}">
+      {{icon}}
+    </mat-icon>
+  </div>
+  <div class="col d-flex align-items-center justify-content-start px-1" [ngClass]="{'pr-3': !indefinite}">
+    <span class="fs-15 snackbar-line-height snackbar-line-break">{{message}}</span>
+  </div>
+  <div class="col-auto d-flex align-items-center pl-1 pr-2" *ngIf="indefinite">
+    <button mat-button (click)="onOk()">OK</button>
+  </div>
+</div>

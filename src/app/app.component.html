@@ -1,0 +1,35 @@
+<div class="main-page">
+  <div class="main-page-top">
+    <app-header (logoClicked)="toHome()"></app-header>
+  </div>
+
+  <div class="main-page-content">
+    <div class="h-100 overflow-auto">
+      <mat-sidenav-container (backdropClick)="toggleSidenav()" autosize>
+        <mat-sidenav #sidenav="matSidenav" [opened]="sidenavOpened$ | async">
+          <mat-nav-list class="nav-list-padding unselectable">
+            <mat-list-item [hidden]="item.isAccountLocked" class="mat-list-height"
+              [ngClass]="{'active-item': item.clicked}" *ngFor="let item of sideNavItems; let i = index"
+              (click)="itemClicked(i)">
+              <mat-icon mat-list-icon class="grey-color">{{item.icon}}</mat-icon>
+              <div mat-line class="mat-list-text fs-14 md-spaced-text grey-color">
+                {{item.text}}</div>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+          <div class="content-container">
+            <router-outlet></router-outlet>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </div>
+
+  <div class="main-page-bottom">
+    <app-footer></app-footer>
+  </div>
+</div>
+
+<app-loader></app-loader>
