@@ -31,8 +31,8 @@ export class AppComponent extends BaseComponent {
   private homeURL: boolean = false;
   private loginURL: boolean = false;
   private registerURL: boolean = false;
-  private gradesURL: boolean = false;
-  private absencesURL: boolean = false;
+  private profileURL: boolean = false;
+  private visitsURL: boolean = false;
 
   private role: string | null;
 
@@ -90,8 +90,8 @@ export class AppComponent extends BaseComponent {
       ];
     } else if (this.role == "PATIENT") {
       this.homeURL = true;
-      this.gradesURL = false;
-      this.absencesURL = false;
+      this.profileURL = false;
+      this.visitsURL = false;
 
       this.sideNavItems = [
         {
@@ -100,20 +100,20 @@ export class AppComponent extends BaseComponent {
           clicked: this.homeURL
         },
         {
-          icon: "grade",
-          text: "Grades",
-          clicked: this.gradesURL,
+          icon: "account_circle",
+          text: "Profile",
+          clicked: this.profileURL,
         },
         {
-          icon: "rule",
-          text: "Absences",
-          clicked: this.absencesURL,
+          icon: "pending_actions",
+          text: "Visits",
+          clicked: this.visitsURL,
         }
       ];
     } else if (this.role == "DOCTOR") {
       this.homeURL = true;
-      this.gradesURL = false;
-      this.absencesURL = false;
+      this.profileURL = false;
+      this.visitsURL = false;
 
       this.sideNavItems = [
         {
@@ -122,14 +122,14 @@ export class AppComponent extends BaseComponent {
           clicked: this.homeURL
         },
         {
-          icon: "grade",
-          text: "Grades",
-          clicked: this.gradesURL,
+          icon: "account_circle",
+          text: "Profile",
+          clicked: this.profileURL,
         },
         {
-          icon: "rule",
-          text: "Absences",
-          clicked: this.absencesURL,
+          icon: "pending_actions",
+          text: "Visits",
+          clicked: this.visitsURL,
         }
       ];
     }
@@ -171,16 +171,16 @@ export class AppComponent extends BaseComponent {
     } else if (this.role == "PATIENT") {
       if (this.location.path() == "/home") {
         this.homeURL = true;
-        this.gradesURL = false;
-        this.absencesURL = false;
-      } else if (this.location.path() == "/grades") {
-        this.gradesURL = true;
+        this.profileURL = false;
+        this.visitsURL = false;
+      } else if (this.location.path() == "/profile") {
+        this.profileURL = true;
         this.homeURL = false;
-        this.absencesURL = false;
-      } else if (this.location.path() == "/absences") {
-        this.absencesURL = true;
+        this.visitsURL = false;
+      } else if (this.location.path() == "/visits") {
+        this.visitsURL = true;
         this.homeURL = false;
-        this.gradesURL = false;
+        this.profileURL = false;
       }
 
       this.sideNavItems = [
@@ -190,29 +190,29 @@ export class AppComponent extends BaseComponent {
           clicked: this.homeURL
         },
         {
-          icon: "grade",
-          text: "Grades",
-          clicked: this.gradesURL,
+          icon: "account_circle",
+          text: "Profile",
+          clicked: this.profileURL,
         },
         {
-          icon: "rule",
-          text: "Absences",
-          clicked: this.absencesURL,
+          icon: "pending_actions",
+          text: "Visits",
+          clicked: this.visitsURL,
         }
       ];
     } else if (this.role == "DOCTOR") {
       if (this.location.path() == "/home") {
         this.homeURL = true;
-        this.gradesURL = false;
-        this.absencesURL = false;
-      } else if (this.location.path() == "/grades") {
-        this.gradesURL = true;
+        this.profileURL = false;
+        this.visitsURL = false;
+      } else if (this.location.path() == "/profile") {
+        this.profileURL = true;
         this.homeURL = false;
-        this.absencesURL = false;
-      } else if (this.location.path() == "/absences") {
-        this.absencesURL = true;
+        this.visitsURL = false;
+      } else if (this.location.path() == "/visits") {
+        this.visitsURL = true;
         this.homeURL = false;
-        this.gradesURL = false;
+        this.profileURL = false;
       }
 
       this.sideNavItems = [
@@ -222,14 +222,14 @@ export class AppComponent extends BaseComponent {
           clicked: this.homeURL
         },
         {
-          icon: "grade",
-          text: "Grades",
-          clicked: this.gradesURL,
+          icon: "account_circle",
+          text: "Profile",
+          clicked: this.profileURL,
         },
         {
-          icon: "rule",
-          text: "Absences",
-          clicked: this.absencesURL,
+          icon: "pending_actions",
+          text: "Visits",
+          clicked: this.visitsURL,
         }
       ];
     }
@@ -301,27 +301,27 @@ export class AppComponent extends BaseComponent {
             }
           }
           break;
-        case "Grades":
-          if (this.location.path() == "/grades") {
+        case "Profile":
+          if (this.location.path() == "/profile") {
             window.location.reload();
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
           } else {
-            this.router.navigate(['grades']);
+            this.router.navigate(['profile']);
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
           }
           break;
-        case "Absences":
-          if (this.location.path() == "/absences") {
+        case "Visits":
+          if (this.location.path() == "/visits") {
             window.location.reload();
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
           } else {
-            this.router.navigate(['absences']);
+            this.router.navigate(['visits']);
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
@@ -343,27 +343,27 @@ export class AppComponent extends BaseComponent {
             }
           }
           break;
-        case "Grades":
-          if (this.location.path() == "/grades") {
+        case "Profile":
+          if (this.location.path() == "/profile") {
             window.location.reload();
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
           } else {
-            this.router.navigate(['grades']);
+            this.router.navigate(['profile']);
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
           }
           break;
-        case "Absences":
-          if (this.location.path() == "/absences") {
+        case "Visits":
+          if (this.location.path() == "/visits") {
             window.location.reload();
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
           } else {
-            this.router.navigate(['absences']);
+            this.router.navigate(['visits']);
             if (this.sidenav.mode == 'over') {
               this.closeSidenav();
             }
