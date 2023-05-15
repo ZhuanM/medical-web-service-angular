@@ -8,5 +8,10 @@ export class ProfileService {
     private http: HttpClient
   ) {}
 
-  
+  updateHealthTaxDate(id: string, date: string) {
+    return this.http.patch<any>(
+      apiUrls.patientUrl + '/' + id,
+      { healthTaxesPaidUntil: date }
+    )
+  }
 }

@@ -101,13 +101,17 @@ export class RegisterComponent extends BaseComponent {
       this.store.dispatch(appLoading({ loading: true }));
       const role: string = this.registerForm.get('role').value;
       if (role == "PATIENT") {
+        const gp = {
+          userId: this.registerForm.get('gp').value.id
+        };
+
         this.store.dispatch(AuthActions.registerPatient(
           {
             name: this.registerForm.get('name').value,
             username: this.registerForm.get('username').value,
             password: this.registerForm.get('passwords')?.get('password').value,
             uniqueCitizenNumber: this.registerForm.get('uniqueUserNumber').value,
-            gp: this.registerForm.get('gp').value
+            gp: gp
           }
         ));
       } else if (role == "DOCTOR") {

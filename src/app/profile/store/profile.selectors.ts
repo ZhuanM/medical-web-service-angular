@@ -4,3 +4,7 @@ import { State } from "./profile.reducer";
 
 const profileSelector = createFeatureSelector<AppState, State>('profile');
 
+export const healthTaxDate = createSelector(
+  profileSelector,
+  (state: State) => state.healthTaxDate
+);
