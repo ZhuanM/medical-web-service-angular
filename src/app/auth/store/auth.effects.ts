@@ -20,9 +20,8 @@ export class AuthEffects {
         .pipe(
           tap(() => this.router.navigate(['/home'])),
           map(response => {
-            this.setLocalStorageData(response);
-            localStorage.setItem('role', response.role);
-            localStorage.setItem('id', response.userId);
+            this.setInitialLocalStorageData(response);
+
             return AuthActions.authSuccess(
               {
                 accessToken: response.jwtToken,
@@ -48,7 +47,7 @@ export class AuthEffects {
       return this.authService.getUser(action.role, action.id)
         .pipe(
           map(response => {
-            localStorage.setItem('name', response.username);
+            this.setUserLocalStorageData(response);
 
             this.appService.openSnackBar("Successfully logged in!", MessageType.Success);
 
@@ -68,13 +67,7 @@ export class AuthEffects {
     ofType(AuthActions.logout),
       tap(() => this.router.navigate(['/home'])),
       map(() => {
-        // TOKEN
-        localStorage.removeItem('access_token');
-
-        // USER
-        localStorage.removeItem('role');
-        localStorage.removeItem('name');
-        localStorage.removeItem('id');
+        localStorage.clear();
 
         return AuthActions.logoutSuccess();
       }),
@@ -170,7 +163,22 @@ export class AuthEffects {
     private router: Router
   ){}
 
-  private setLocalStorageData(authData: Auth) {
+  private setInitialLocalStorageData(authData: Auth) {
     localStorage.setItem('access_token', authData.jwtToken);
+    localStorage.setItem('role', authData.role);
+    localStorage.setItem('userId', authData.userId);
+  }
+
+  private setUserLocalStorageData(userData: any) {
+    localStorage.setItem('name', userData.name);
+    // TODO CHANGE TO uniqueCitizenNumber
+    localStorage.setItem('ucn', userData.ucn);
+    // TODO CHANGE TO uniqueDoctorNumber
+    localStorage.setItem('npi', userData.npi);
+    localStorage.setItem('healthTaxesPaidUntil', userData.healthTaxesPaidUntil);
+    localStorage.setItem('gp', userData.gp);
+    localStorage.setItem('engagedParty', userData.engagedParty);
+    // TODO CHANGE TO specializations
+    localStorage.setItem('specializations', userData.specialities);
   }
 }
