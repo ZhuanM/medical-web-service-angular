@@ -62,6 +62,10 @@ import { HomeComponent } from './home/home.component';
 import { AuthEffects } from './auth/store/auth.effects';
 import { HeaderEffects } from './header/store/header.effects';
 import { AppSnackbarComponent } from './shared/snackbars/app-snackbar/app-snackbar.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileEffects } from './profile/store/profile.effects';
+import { VisitsComponent } from './visits/visits.component';
+import { VisitsEffects } from './visits/store/visits.effects';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'fill'
@@ -78,6 +82,8 @@ const appearance: MatFormFieldDefaultOptions = {
     RegisterComponent,
     HomeComponent,
     AppSnackbarComponent,
+    ProfileComponent,
+    VisitsComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +96,8 @@ const appearance: MatFormFieldDefaultOptions = {
     EffectsModule.forRoot([
       AuthEffects,
       HeaderEffects,
+      ProfileEffects,
+      VisitsEffects,
     ]),
     StoreRouterConnectingModule.forRoot(),
     AppRoutingModule,
