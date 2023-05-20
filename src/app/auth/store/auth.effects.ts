@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageType } from 'src/app/shared/models/message-type.enum';
 import { Auth } from 'src/app/shared/models/auth.interface';
+import { setUserLocalStorageData } from 'src/app/shared/utility';
 
 @Injectable()
 export class AuthEffects {
@@ -47,7 +48,7 @@ export class AuthEffects {
       return this.authService.getUser(action.role, action.id)
         .pipe(
           map(response => {
-            this.setUserLocalStorageData(response);
+            setUserLocalStorageData(response);
 
             this.appService.openSnackBar("Successfully logged in!", MessageType.Success);
 
@@ -167,18 +168,5 @@ export class AuthEffects {
     localStorage.setItem('access_token', authData.jwtToken);
     localStorage.setItem('role', authData.role);
     localStorage.setItem('userId', authData.userId);
-  }
-
-  private setUserLocalStorageData(userData: any) {
-    localStorage.setItem('name', userData.name);
-    // TODO CHANGE TO uniqueCitizenNumber
-    localStorage.setItem('ucn', userData.ucn);
-    // TODO CHANGE TO uniqueDoctorNumber
-    localStorage.setItem('npi', userData.npi);
-    localStorage.setItem('healthTaxesPaidUntil', userData.healthTaxesPaidUntil);
-    localStorage.setItem('gp', userData.gp);
-    localStorage.setItem('engagedParty', userData.engagedParty);
-    // TODO CHANGE TO specializations
-    localStorage.setItem('specializations', userData.specialities);
   }
 }

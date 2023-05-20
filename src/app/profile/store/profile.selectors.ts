@@ -8,3 +8,23 @@ export const healthTaxDate = createSelector(
   profileSelector,
   (state: State) => state.healthTaxDate
 );
+
+export const patient = createSelector(
+  profileSelector,
+  (state: State) => state.patient
+);
+
+export const doctor = createSelector(
+  profileSelector,
+  (state: State) => state.doctor
+);
+
+export const doctorVisits = createSelector(
+  profileSelector,
+  (state: State) => state.doctorVisits
+);
+
+export const doctorPatients = createSelector(
+  profileSelector,
+  (state: State) => state.doctorPatients
+);

@@ -68,6 +68,10 @@ body {
   padding-top: 2px;
 }
 
+.mat-primary .mat-pseudo-checkbox-checked {
+  background: #cd3e3e !important;
+}
+
 // MENU ITEMS
 .mat-menu-item:hover:not([disabled]) {
   background: #cd3e3e !important;

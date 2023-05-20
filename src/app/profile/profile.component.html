@@ -38,8 +38,31 @@
             </div>
           </mat-card-content>
           <mat-card-content *ngIf="role === 'DOCTOR'">
-            Doctor's name: {{ name }}
-            <!-- TODO REST OF DOCTOR'S PROFILE -->
+            <div class="mb-3 fs-16">
+              Doctor's name: {{ name }}
+            </div>
+            <div *ngIf="doctorSpecializations" class="mb-3 fs-16">
+              {{ doctorSpecializations.length == 1 ? 'Specialization: ' : doctorSpecializations.length > 1 ? 'Specializations: ' : '' }}
+              <span *ngFor="let specialization of doctorSpecializations">{{ specialization }}</span>
+            </div>
+            <div class="mb-3 fs-16">
+              Number of patients assigned to you: {{ numberOfDoctorPatients }}
+            </div>
+            <div class="mb-3 fs-16">
+              Number of visits: {{ numberOfDoctorVisits }}
+            </div>
+            <mat-form-field>
+              <mat-label>Specializations</mat-label>
+              <mat-select [(ngModel)]="selectedSpecialization" multiple>
+                <mat-select-trigger>
+                  {{selectedSpecialization?.[0] || ''}}
+                  <span *ngIf="(selectedSpecialization?.length || 0) > 1">
+                    (+{{(selectedSpecialization?.length || 0) - 1}} {{selectedSpecialization?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization">{{specialization}}</mat-option>
+              </mat-select>
+            </mat-form-field>
           </mat-card-content>
         </mat-card>
       </div>
