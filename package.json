@@ -24,6 +24,7 @@
     "@ngrx/router-store": "^14.3.3",
     "@ngrx/store": "^14.3.3",
     "@ngrx/store-devtools": "^14.3.3",
+    "@syncfusion/ej2-angular-grids": "^21.2.5",
     "bootstrap": "^4.6.1",
     "jquery": "^3.6.0",
     "ngx-bootstrap": "^9.0.0",

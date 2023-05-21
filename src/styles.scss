@@ -1,15 +1,15 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-// @import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-angular-grids/styles/material.css';
-// @import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-grids/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/material.css';
 
 html,
 body {
@@ -437,17 +437,17 @@ button {
 }
 
 //SYNCFUSION DATA TABLE
-// .e-pager .e-currentitem {
-//   background-color: #cd3e3e !important;
-// }
+.e-pager .e-currentitem {
+  background-color: #cd3e3e !important;
+}
 
-// .e-input-group:not(.e-float-icon-left):not(.e-float-input)::before,
-// .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before,
-// .e-input-group:not(.e-float-icon-left):not(.e-float-input)::after,
-// .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after {
-//   background: #cd3e3e !important;
-// }
+.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before,
+.e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before,
+.e-input-group:not(.e-float-icon-left):not(.e-float-input)::after,
+.e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after {
+  background: #cd3e3e !important;
+}
 
-// .e-datetime-wrapper .e-input-group-icon.e-icons.e-active {
-//   color: #cd3e3e !important;
-// }
+.e-datetime-wrapper .e-input-group-icon.e-icons.e-active {
+  color: #cd3e3e !important;
+}

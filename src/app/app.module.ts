@@ -48,6 +48,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule, DatePipe } from '@angular/common';
+// EJ2 Syncfusion Grid
+import { GridModule } from '@syncfusion/ej2-angular-grids';
 // CUSTOM
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -139,6 +141,8 @@ const appearance: MatFormFieldDefaultOptions = {
     MatSnackBarModule,
     MatTooltipModule,
     MatNativeDateModule,
+    // EJ2 Syncfusion Grid
+    GridModule,
   ],
   providers: [
     { 
