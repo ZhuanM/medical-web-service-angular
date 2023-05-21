@@ -48,8 +48,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule, DatePipe } from '@angular/common';
-// EJ2 Syncfusion Grid
-import { GridModule } from '@syncfusion/ej2-angular-grids';
+// AG Grid
+import { AgGridModule } from 'ag-grid-angular';
 // CUSTOM
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -68,6 +68,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileEffects } from './profile/store/profile.effects';
 import { VisitsComponent } from './visits/visits.component';
 import { VisitsEffects } from './visits/store/visits.effects';
+import { EditButtonRendererComponent } from './shared/ag-grid-edit-button/edit-button-renderer.component';
+import { TreatmentRendererComponent } from './shared/ag-grid-treatment/treatment-renderer.component';
+import { EditVisitModalComponent } from './shared/modals/edit-visit-modal/edit-visit-modal.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'fill'
@@ -86,6 +89,9 @@ const appearance: MatFormFieldDefaultOptions = {
     AppSnackbarComponent,
     ProfileComponent,
     VisitsComponent,
+    EditButtonRendererComponent,
+    TreatmentRendererComponent,
+    EditVisitModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,8 +147,8 @@ const appearance: MatFormFieldDefaultOptions = {
     MatSnackBarModule,
     MatTooltipModule,
     MatNativeDateModule,
-    // EJ2 Syncfusion Grid
-    GridModule,
+    // AG Grid
+    AgGridModule,
   ],
   providers: [
     { 

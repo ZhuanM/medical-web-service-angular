@@ -1,15 +1,6 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-angular-grids/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/material.css';
+@import "../node_modules/ag-grid-community/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/styles/ag-theme-alpine.css";
 
 html,
 body {
@@ -215,6 +206,11 @@ mat-sidenav {
 .mat-list-base .mat-list-item .mat-list-item-ripple,
 .mat-list-base .mat-list-option .mat-list-item-ripple {
   border-radius: 4px;
+}
+
+// Datepicker
+.mat-datepicker-toggle-active {
+  color: #cd3e3e;
 }
 
 // TABS
@@ -436,18 +432,8 @@ button {
   user-select: none;
 }
 
-//SYNCFUSION DATA TABLE
-.e-pager .e-currentitem {
-  background-color: #cd3e3e !important;
-}
-
-.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before,
-.e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before,
-.e-input-group:not(.e-float-icon-left):not(.e-float-input)::after,
-.e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after {
-  background: #cd3e3e !important;
-}
-
-.e-datetime-wrapper .e-input-group-icon.e-icons.e-active {
-  color: #cd3e3e !important;
+// AG-Grid styles
+.ag-cell {
+  display: flex;
+  align-items: center;
 }

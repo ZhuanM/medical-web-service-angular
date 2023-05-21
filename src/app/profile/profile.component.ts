@@ -110,12 +110,14 @@ export class ProfileComponent extends BaseComponent {
   public payHealthTaxes() {
     const userId = localStorage.getItem('userId');
     const dateToPatch = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
+    this.store.dispatch(appLoading({ loading: true }));
     this.store.dispatch(updateHealthTaxDate({ id: userId, date: dateToPatch }));
   }
 
   public saveSpecializations() {
     const userId = localStorage.getItem('userId');
     const specializations = this.selectedSpecializations;
+    this.store.dispatch(appLoading({ loading: true }));
     this.store.dispatch(updateDoctorSpecializations({ id: userId, specializations: specializations }));
   }
 

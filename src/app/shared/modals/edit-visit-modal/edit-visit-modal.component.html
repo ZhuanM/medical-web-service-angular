@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Edit Visit</h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm">
+    <mat-form-field>
+      <mat-label>Diagnosis</mat-label>
+      <input matInput formControlName="diagnosis" placeholder="Diagnosis" required>
+      <mat-error *ngIf="editForm.controls.diagnosis.invalid && editForm.controls.diagnosis.touched">
+        Diagnosis is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="mb-3" formArrayName="treatment">
+      <div *ngFor="let medicament of treatmentControls; let i = index" [formGroupName]="i" class="medicament-row">
+        <mat-form-field>
+          <mat-label>Medicament Name</mat-label>
+          <input matInput formControlName="medicamentName" placeholder="Medicament Name" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Dosage</mat-label>
+          <input matInput formControlName="dosage" placeholder="Dosage" required>
+        </mat-form-field>
+        <button mat-icon-button (click)="removeMedicament(i)" [disabled]="treatmentControls.length === 1">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <button mat-raised-button (click)="addMedicament()">Add Medicament</button>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Sick Leave From</mat-label>
+      <input matInput [matDatepicker]="sickLeaveFromPicker" formControlName="sickLeaveFrom" placeholder="Sick Leave From" required>
+      <mat-datepicker-toggle matSuffix [for]="sickLeaveFromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #sickLeaveFromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Sick Leave To</mat-label>
+      <input matInput [matDatepicker]="sickLeaveToPicker" formControlName="sickLeaveTo" placeholder="Sick Leave To" required>
+      <mat-datepicker-toggle matSuffix [for]="sickLeaveToPicker"></mat-datepicker-toggle>
+      <mat-datepicker #sickLeaveToPicker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-flat-button class="white-color red-nbu-button" (click)="onSaveClick()">Save</button>
+</mat-dialog-actions>
