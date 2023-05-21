@@ -97,4 +97,19 @@ export class ProfileEffects {
       })
     )
   );
+
+  updateDoctorSpecializations$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.updateDoctorSpecializations),
+      switchMap((action) => {
+        return this.profileService.updateDoctorSpecializations(action.id, action.specializations).pipe(
+          map((response) => {
+            this.appService.openSnackBar('Successfully updated specializations!', MessageType.Success);
+            localStorage.setItem('specializations', JSON.stringify(action.specializations));
+            return ProfileActions.updateDoctorSpecializationsSuccess();
+          })
+        );
+      })
+    )
+  );
 }

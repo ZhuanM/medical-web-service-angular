@@ -70,3 +70,15 @@ export const getDoctorAssignedPatientsSuccess = createAction(
     doctorPatients: any
   }>()
 );
+
+export const updateDoctorSpecializations = createAction(
+  '[Profile Component] Update Doctor Specializations',
+  props<{
+    id: string,
+    specializations: Array<string>
+  }>()
+);
+
+export const updateDoctorSpecializationsSuccess = createAction(
+  '[Profile Component] Update Doctor Specializations Success'
+);

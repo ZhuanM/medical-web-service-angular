@@ -2,7 +2,7 @@
   <div class="col-12 col-xl-5">
     <div class="row h-100 m-0 justify-content-center align-items-center">
       <div class="col mb-4">
-        <mat-card>
+        <mat-card class="text-center">
           <mat-card-title>
             <div class="d-flex justify-content-center unselectable mb-4">
               <img class="medical-logo" src="../../assets/logo/orange_logo_transparent.png" alt="NBU Medical Service Logo">
@@ -43,7 +43,9 @@
             </div>
             <div *ngIf="doctorSpecializations" class="mb-3 fs-16">
               {{ doctorSpecializations.length == 1 ? 'Specialization: ' : doctorSpecializations.length > 1 ? 'Specializations: ' : '' }}
-              <span *ngFor="let specialization of doctorSpecializations">{{ specialization }}</span>
+              <span *ngFor="let specialization of doctorSpecializations; let last = last">
+                {{ specialization }}{{ !last ? ', ' : '' }}
+              </span>
             </div>
             <div class="mb-3 fs-16">
               Number of patients assigned to you: {{ numberOfDoctorPatients }}
@@ -53,16 +55,19 @@
             </div>
             <mat-form-field>
               <mat-label>Specializations</mat-label>
-              <mat-select [(ngModel)]="selectedSpecialization" multiple>
+              <mat-select [(ngModel)]="selectedSpecializations" multiple>
                 <mat-select-trigger>
-                  {{selectedSpecialization?.[0] || ''}}
-                  <span *ngIf="(selectedSpecialization?.length || 0) > 1">
-                    (+{{(selectedSpecialization?.length || 0) - 1}} {{selectedSpecialization?.length === 2 ? 'other' : 'others'}})
+                  {{selectedSpecializations?.[0] || ''}}
+                  <span *ngIf="(selectedSpecializations?.length || 0) > 1">
+                    (+{{(selectedSpecializations?.length || 0) - 1}} {{selectedSpecializations?.length === 2 ? 'other' : 'others'}})
                   </span>
                 </mat-select-trigger>
                 <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization">{{specialization}}</mat-option>
               </mat-select>
             </mat-form-field>
+            <div>
+              <button mat-raised-button class="red-nbu-button white-color" (click)="saveSpecializations()">Save Specializations</button>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>

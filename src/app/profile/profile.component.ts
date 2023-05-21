@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { ActionsSubject, Store, select } from '@ngrx/store';
 import { BaseComponent } from '../shared/base.component';
 import { AppState } from '../shared/models/app-state.interface';
 import { DatePipe } from '@angular/common';
-import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { doctor, doctorPatients, doctorVisits, healthTaxDate, patient } from './store/profile.selectors';
-import { getDoctorAssignedPatients, getDoctorById, getDoctorVisits, getPatientById, updateHealthTaxDate } from './store/profile.actions';
+import { getDoctorAssignedPatients, getDoctorById, getDoctorVisits, getPatientById, updateDoctorSpecializations, updateHealthTaxDate } from './store/profile.actions';
 import { appLoading } from '../shared/loader/store/loader.actions';
 import { getSpecializations } from '../auth/store/auth.actions';
-import { specializations } from '../auth/store/auth.selectors';
+import { specializations, user } from '../auth/store/auth.selectors';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +17,8 @@ import { specializations } from '../auth/store/auth.selectors';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent extends BaseComponent {
+  private subscription = new Subscription();
+
   readonly healthTaxDate$: Observable<string> = this.store.pipe(select(healthTaxDate), takeUntil(this.destroyed$));
   readonly patient$: Observable<any> = this.store.pipe(select(patient), takeUntil(this.destroyed$));
   readonly doctor$: Observable<any> = this.store.pipe(select(doctor), takeUntil(this.destroyed$));
@@ -32,13 +34,17 @@ export class ProfileComponent extends BaseComponent {
   public numberOfDoctorPatients: number;
   public doctorPatients: any;
   public allSpecializations: any;
-  public selectedSpecialization: any;
+  public selectedSpecializations: any;
 
   public minDate: Date;
   public selectedDate: Date;
-
-  constructor(private store: Store<AppState>, private datePipe: DatePipe) {
+  constructor(private store: Store<AppState>, private datePipe: DatePipe, private actionsSubject$: ActionsSubject) {
     super();
+
+    this.subscription.add(this.actionsSubject$.pipe(filter((action) => action.type === '[Profile Component] Update Doctor Specializations Success'))
+    .subscribe(() => {
+      this.doctorSpecializations = this.selectedSpecializations;
+    }));
 
     const userId = localStorage.getItem('userId');
     this.store.dispatch(appLoading({ loading: true }));
@@ -80,8 +86,9 @@ export class ProfileComponent extends BaseComponent {
 
       this.doctor$.pipe(takeUntil(this.destroyed$)).subscribe(doctor => {
         if (doctor) {
-          this.name = localStorage.getItem("name");
+          this.name = doctor.name;
           this.doctorSpecializations = doctor.specialities;
+          this.selectedSpecializations = this.doctorSpecializations;
         }
       });
 
@@ -104,5 +111,15 @@ export class ProfileComponent extends BaseComponent {
     const userId = localStorage.getItem('userId');
     const dateToPatch = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
     this.store.dispatch(updateHealthTaxDate({ id: userId, date: dateToPatch }));
+  }
+
+  public saveSpecializations() {
+    const userId = localStorage.getItem('userId');
+    const specializations = this.selectedSpecializations;
+    this.store.dispatch(updateDoctorSpecializations({ id: userId, specializations: specializations }));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
