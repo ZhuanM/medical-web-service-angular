@@ -8,10 +8,12 @@ import { doctorVisits, patientVisits } from './store/visits.selectors';
 import { AppService } from '../app.service';
 import { getDoctorVisits, getPatientVisits } from './store/visits.actions';
 import { ColDef } from 'ag-grid-community';
-import { MatButtonModule } from '@angular/material/button';
 import { EditButtonRendererComponent } from '../shared/ag-grid-edit-button/edit-button-renderer.component';
 import { MessageType } from '../shared/models/message-type.enum';
 import { TreatmentRendererComponent } from '../shared/ag-grid-treatment/treatment-renderer.component';
+import { getPatientById } from '../profile/store/profile.actions';
+import { patient } from '../profile/store/profile.selectors';
+import { hasPaidHealthTaxesForLastSixMonths } from '../shared/utility';
 
 @Component({
   selector: 'app-visits',
@@ -20,6 +22,8 @@ import { TreatmentRendererComponent } from '../shared/ag-grid-treatment/treatmen
 })
 export class VisitsComponent extends BaseComponent {
   private subscription = new Subscription();
+
+  readonly patient$: Observable<any> = this.store.pipe(select(patient), takeUntil(this.destroyed$));
 
   readonly doctorVisits$: Observable<any> = this.store.pipe(
     select(doctorVisits),
@@ -34,6 +38,8 @@ export class VisitsComponent extends BaseComponent {
   public patientVisits: any;
 
   public role: string;
+
+  public healthTaxesArePaid: boolean;
 
   public frameworkComponents: any;
 
@@ -210,6 +216,17 @@ export class VisitsComponent extends BaseComponent {
     this.store.dispatch(appLoading({ loading: true }));
     if (this.role === 'PATIENT') {
       this.store.dispatch(getPatientVisits({ id: userId }));
+
+      this.store.dispatch(appLoading({ loading: true }));
+      this.store.dispatch(getPatientById({ id: userId }));
+
+      this.patient$.pipe(takeUntil(this.destroyed$)).subscribe(patient => {
+        if (patient) {
+          const healthTaxesPaidUntil = patient.healthTaxesPaidUntil;
+          this.healthTaxesArePaid = hasPaidHealthTaxesForLastSixMonths(healthTaxesPaidUntil);
+          localStorage.setItem('healthTaxesArePaid', JSON.stringify(this.healthTaxesArePaid));
+        }
+      });
 
       this.patientVisits$
         .pipe(takeUntil(this.destroyed$))

@@ -2,7 +2,7 @@
   Visits:
 </div>
 <!-- PATIENT VISITS -->
-<div class="row justify-content-center align-items-center" *ngIf="role === 'PATIENT'">
+<div class="row justify-content-center align-items-center" *ngIf="role === 'PATIENT' && healthTaxesArePaid">
   <div class="col p-0">
     <ag-grid-angular
       style="width: 100%; height: 500px;"
@@ -14,6 +14,9 @@
       [frameworkComponents]="frameworkComponents">
     </ag-grid-angular>
   </div>
+</div>
+<div class="fs-20 font-weight-bolder" style="color: red;" *ngIf="role === 'PATIENT' && !healthTaxesArePaid">
+  Health taxes aren't paid! Please pay them to use our services!
 </div>
 
 <!-- DOCTOR VISITS -->

@@ -10,6 +10,7 @@ import { getDoctorAssignedPatients, getDoctorById, getDoctorVisits, getPatientBy
 import { appLoading } from '../shared/loader/store/loader.actions';
 import { getSpecializations } from '../auth/store/auth.actions';
 import { specializations, user } from '../auth/store/auth.selectors';
+import { hasPaidHealthTaxesForLastSixMonths } from '../shared/utility';
 
 @Component({
   selector: 'app-profile',
@@ -29,15 +30,20 @@ export class ProfileComponent extends BaseComponent {
   public role: string = localStorage.getItem("role");
   public name: string;
   public healthTaxesPaidUntil: string;
+  public healthTaxesArePaid: boolean;
   public doctorSpecializations: Array<any> = [];
   public numberOfDoctorVisits: number;
   public numberOfDoctorPatients: number;
   public doctorPatients: any;
   public allSpecializations: any;
   public selectedSpecializations: any;
+  public uniqueCitizenNumber: string;
+  public uniqueDoctorNumber: string;
+  public gpName: string;
 
   public minDate: Date;
   public selectedDate: Date;
+
   constructor(private store: Store<AppState>, private datePipe: DatePipe, private actionsSubject$: ActionsSubject) {
     super();
 
@@ -48,21 +54,33 @@ export class ProfileComponent extends BaseComponent {
 
     const userId = localStorage.getItem('userId');
     this.store.dispatch(appLoading({ loading: true }));
-    if (this.role === 'STUDENT') {
+    if (this.role === 'PATIENT') {
       this.store.dispatch(getPatientById({ id: userId }));
 
       this.patient$.pipe(takeUntil(this.destroyed$)).subscribe(patient => {
         if (patient) {
-          this.name = localStorage.getItem("name");
-          this.healthTaxesPaidUntil = localStorage.getItem("healthTaxesPaidUntil");
+          this.name = patient.name;
+          // TODO change ucn
+          this.uniqueCitizenNumber = patient.ucn;
+          this.gpName = patient.gp.name;
+          this.healthTaxesPaidUntil = patient.healthTaxesPaidUntil;
+          this.healthTaxesArePaid = hasPaidHealthTaxesForLastSixMonths(this.healthTaxesPaidUntil);
+          localStorage.setItem('healthTaxesArePaid', JSON.stringify(this.healthTaxesArePaid));
+
+          if (this.healthTaxesPaidUntil) {
+            this.minDate = new Date(this.healthTaxesPaidUntil);
+          } else {
+            this.minDate = new Date();
+          }
         }
       });
 
-      this.minDate = new Date(this.healthTaxesPaidUntil);
-  
       this.healthTaxDate$.pipe(takeUntil(this.destroyed$)).subscribe(healthTaxDate => {
         if (healthTaxDate) {
           this.healthTaxesPaidUntil = localStorage.getItem("healthTaxesPaidUntil");
+          this.healthTaxesArePaid = hasPaidHealthTaxesForLastSixMonths(this.healthTaxesPaidUntil);
+          localStorage.setItem('healthTaxesArePaid', JSON.stringify(this.healthTaxesArePaid));
+
           this.minDate = new Date(this.healthTaxesPaidUntil);
         }
       });
@@ -87,6 +105,9 @@ export class ProfileComponent extends BaseComponent {
       this.doctor$.pipe(takeUntil(this.destroyed$)).subscribe(doctor => {
         if (doctor) {
           this.name = doctor.name;
+          // TODO change npi
+          this.uniqueDoctorNumber = doctor.npi;
+          // TODO change specialities
           this.doctorSpecializations = doctor.specialities;
           this.selectedSpecializations = this.doctorSpecializations;
         }
