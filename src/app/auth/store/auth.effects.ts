@@ -93,6 +93,13 @@ export class AuthEffects {
             return AuthActions.login({username: username, password: password})
           }),
           catchError((errorRes: HttpErrorResponse) => {
+            if (errorRes?.error?.errorMessage == 'UniqueCitizenNumber exists!') {
+              this.appService.openSnackBar('Unique Citizen Number already exists!', MessageType.Error);
+            }
+            if (errorRes?.error?.errorMessage == 'Username exists!') {
+              this.appService.openSnackBar('Username already exists!', MessageType.Error);
+            }
+
             return of(AuthActions.authFail(
               { errorMessage: 'Invalid email and/or password' }
             ));
@@ -120,6 +127,13 @@ export class AuthEffects {
             return AuthActions.login({username: username, password: password})
           }),
           catchError((errorRes: HttpErrorResponse) => {
+            if (errorRes?.error?.errorMessage == 'UniqueDoctorNumber exists!') {
+              this.appService.openSnackBar('Unique Doctor Number already exists!', MessageType.Error);
+            }
+            if (errorRes?.error?.errorMessage == 'Username exists!') {
+              this.appService.openSnackBar('Username already exists!', MessageType.Error);
+            }
+
             return of(AuthActions.authFail(
               { errorMessage: 'Invalid email and/or password' }
             ));
