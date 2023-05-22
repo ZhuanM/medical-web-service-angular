@@ -7,8 +7,10 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-button-renderer',
   template: `
-    <div *ngFor="let medicament of params.value">
-      {{ medicament.medicamentName }}: {{ medicament.dosage }}
+    <div *ngIf="params?.value">
+      <div *ngFor="let medicament of params.value">
+        {{ medicament.medicamentName }}: {{ medicament.dosage }}
+      </div>
     </div>
   `,
 })

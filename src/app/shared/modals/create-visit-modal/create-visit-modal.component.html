@@ -1,0 +1,31 @@
+<h2>Create Visit</h2>
+<form [formGroup]="createForm">
+  <div class="mb-2">
+    <mat-form-field>
+      <mat-label>Doctor</mat-label>
+      <mat-select formControlName="doctor" required>
+        <mat-option *ngFor="let doctor of doctorNames" [value]="doctor">{{doctor.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="createForm?.controls?.doctor?.invalid && createForm?.controls?.doctor?.touched">
+        Please select a doctor.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-2">
+    <mat-form-field>
+      <mat-label>Visit Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="visitDate" placeholder="Visit Date" [min]="minDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="createForm?.controls?.visitDate?.invalid && createForm?.controls?.visitDate?.touched">
+        Please select a visit date.
+      </mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<div class="action-buttons">
+  <button mat-flat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button class="red-nbu-button white-color" (click)="onCreate()">Create</button>
+</div>

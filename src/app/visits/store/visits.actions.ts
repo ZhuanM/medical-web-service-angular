@@ -40,3 +40,16 @@ export const updateVisitSuccess = createAction(
   '[Visits Component] Update Visit Success'
 );
 
+export const createVisit = createAction(
+  '[Visits Component] Create Visit',
+  props<{
+    date: string,
+    doctor: {name: string, userId: string},
+    patient: {name: string, userId: string}
+  }>()
+);
+
+export const createVisitSuccess = createAction(
+  '[Visits Component] Create Visit Success'
+);
+

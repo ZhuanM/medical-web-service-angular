@@ -10,16 +10,19 @@
     </mat-form-field>
 
     <div class="mb-3" formArrayName="treatment">
-      <div *ngFor="let medicament of treatmentControls; let i = index" [formGroupName]="i" class="medicament-row">
+      <div *ngFor="let medicament of treatmentControls; let i = index" [formGroupName]="i">
         <mat-form-field>
           <mat-label>Medicament Name</mat-label>
-          <input matInput formControlName="medicamentName" placeholder="Medicament Name" required>
+          <input matInput formControlName="medicamentName" placeholder="Medicament Name">
         </mat-form-field>
         <mat-form-field>
           <mat-label>Dosage</mat-label>
-          <input matInput formControlName="dosage" placeholder="Dosage" required>
+          <input matInput formControlName="dosage" placeholder="Dosage">
         </mat-form-field>
-        <button mat-icon-button (click)="removeMedicament(i)" [disabled]="treatmentControls.length === 1">
+        <mat-error *ngIf="editForm.hasError('emptyMedicament') && (medicament.controls.medicamentName.touched || medicament.controls.dosage.touched)">
+          Either both fields must be filled, or both must be left empty.
+        </mat-error>
+        <button mat-icon-button (click)="removeMedicament(i)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
@@ -28,20 +31,31 @@
 
     <mat-form-field>
       <mat-label>Sick Leave From</mat-label>
-      <input matInput [matDatepicker]="sickLeaveFromPicker" formControlName="sickLeaveFrom" placeholder="Sick Leave From" required>
+      <input matInput [matDatepicker]="sickLeaveFromPicker" formControlName="sickLeaveFrom" placeholder="Sick Leave From" [min]="minDate">
       <mat-datepicker-toggle matSuffix [for]="sickLeaveFromPicker"></mat-datepicker-toggle>
       <mat-datepicker #sickLeaveFromPicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Sick Leave To</mat-label>
-      <input matInput [matDatepicker]="sickLeaveToPicker" formControlName="sickLeaveTo" placeholder="Sick Leave To" required>
+      <input matInput [matDatepicker]="sickLeaveToPicker" formControlName="sickLeaveTo" placeholder="Sick Leave To" [min]="minSickLeaveToDate">
       <mat-datepicker-toggle matSuffix [for]="sickLeaveToPicker"></mat-datepicker-toggle>
       <mat-datepicker #sickLeaveToPicker></mat-datepicker>
     </mat-form-field>
+
+    <mat-error *ngIf="editForm.hasError('sickLeaveInvalid') && (editForm.controls.sickLeaveFrom.touched || editForm.controls.sickLeaveTo.touched)">
+      Both Sick Leave From and Sick Leave To are required if one is filled.
+    </mat-error>
+    <div *ngIf="editForm.hasError('toDateBeforeToday') && editForm.controls.sickLeaveTo.touched" class="mat-error">
+      Sick Leave To cannot be set before today.
+    </div>
+    
+    <div *ngIf="editForm.hasError('dateRangeInvalid') && (editForm.controls.sickLeaveFrom.touched || editForm.controls.sickLeaveTo.touched)" class="mat-error">
+      Sick Leave To cannot be set before Sick Leave From.
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions class="d-flex justify-content-end">
-  <button mat-flat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-flat-button class="white-color red-nbu-button" (click)="onSaveClick()">Save</button>
+  <button mat-flat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button class="white-color red-nbu-button" (click)="onSave()">Save</button>
 </mat-dialog-actions>

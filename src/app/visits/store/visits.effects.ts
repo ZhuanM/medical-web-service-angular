@@ -60,4 +60,17 @@ export class VisitsEffects {
       })
     )
   );
+
+  createVisit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VisitsActions.createVisit),
+      switchMap((action) => {
+        return this.visitsService.createVisit(action.date, action.doctor, action.patient).pipe(
+          map((response) => {
+            return VisitsActions.createVisitSuccess();
+          })
+        );
+      })
+    )
+  );
 }

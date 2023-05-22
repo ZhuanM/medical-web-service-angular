@@ -44,4 +44,19 @@ export class VisitsService {
       payload
     )
   }
+
+  createVisit(
+    date: string,
+    doctor: {name: string, userId: string},
+    patient: {name: string, userId: string}
+  ) {
+    return this.http.post<any>(
+      apiUrls.visitsUrl,
+      {
+        "date": date,
+        "doctor": doctor,
+        "patient": patient,
+      }
+    )
+  }
 }

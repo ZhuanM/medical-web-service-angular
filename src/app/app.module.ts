@@ -71,6 +71,7 @@ import { VisitsEffects } from './visits/store/visits.effects';
 import { EditButtonRendererComponent } from './shared/ag-grid-edit-button/edit-button-renderer.component';
 import { TreatmentRendererComponent } from './shared/ag-grid-treatment/treatment-renderer.component';
 import { EditVisitModalComponent } from './shared/modals/edit-visit-modal/edit-visit-modal.component';
+import { CreateVisitModalComponent } from './shared/modals/create-visit-modal/create-visit-modal.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'fill'
@@ -92,6 +93,7 @@ const appearance: MatFormFieldDefaultOptions = {
     EditButtonRendererComponent,
     TreatmentRendererComponent,
     EditVisitModalComponent,
+    CreateVisitModalComponent,
   ],
   imports: [
     BrowserModule,
