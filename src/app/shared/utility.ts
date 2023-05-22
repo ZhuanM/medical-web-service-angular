@@ -17,8 +17,7 @@ export function setUserLocalStorageData(userData: any) {
   localStorage.setItem('healthTaxesPaidUntil', userData.healthTaxesPaidUntil);
   localStorage.setItem('gp', userData.gp);
   localStorage.setItem('engagedParty', userData.engagedParty);
-  // TODO CHANGE TO specializations
-  localStorage.setItem('specializations', userData.specialities);
+  localStorage.setItem('specializations', userData.specializations);
 }
 
 export function hasPaidHealthTaxesForLastSixMonths(healthTaxesPaidUntil: any): boolean {

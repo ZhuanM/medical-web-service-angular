@@ -64,7 +64,7 @@ export class AuthService {
         // TODO change "npi" to "uniqueDoctorNumber" in back-end
         "npi": uniqueDoctorNumber,
         // "uniqueDoctorNumber": uniqueDoctorNumber,
-        "specialty": specialization
+        "specialization": specialization
       }
     )
   }

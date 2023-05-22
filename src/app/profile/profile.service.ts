@@ -48,9 +48,8 @@ export class ProfileService {
   }
 
   updateDoctorSpecializations(id: string, specializations: Array<string>) {
-    // TODO CHANGE NAME TO "specializations"
     const payload = {
-      specialities: specializations,
+      specializations: specializations,
     };
 
     return this.http.patch<any>(

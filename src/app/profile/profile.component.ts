@@ -107,8 +107,7 @@ export class ProfileComponent extends BaseComponent {
           this.name = doctor.name;
           // TODO change npi
           this.uniqueDoctorNumber = doctor.npi;
-          // TODO change specialities
-          this.doctorSpecializations = doctor.specialities;
+          this.doctorSpecializations = doctor.specializations;
           this.selectedSpecializations = this.doctorSpecializations;
         }
       });

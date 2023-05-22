@@ -11,7 +11,7 @@ export const apiUrls = {
   doctorUrl: environment.apiBaseUrl + 'doctor', // ROOT
   getDoctorByIdUrl: environment.apiBaseUrl + 'doctor', // /{doctorId} (GET)
   // Specializations
-  getSpecializationsUrl: environment.apiBaseUrl + 'doctor/specialities',
+  getSpecializationsUrl: environment.apiBaseUrl + 'doctor/specializations',
   // Visits
   visitsUrl: environment.apiBaseUrl + 'visits' // ROOT
 }
