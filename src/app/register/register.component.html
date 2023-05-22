@@ -74,7 +74,7 @@
                 </mat-form-field>
               </div>
 
-              <div class="mb-3">
+              <div class="mb-3" [hidden]="doctors.length == 0">
                 <mat-form-field class="w-100">
                   <mat-label>Select GP</mat-label>
                   <mat-select name="gp" formControlName="gp" required>
@@ -83,6 +83,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+              </div>
+              <div class="mb-4 fs-18 font-weight-bolder" *ngIf="doctors.length == 0">
+                No doctors registered in our service yet!
               </div>
             </div>
 
