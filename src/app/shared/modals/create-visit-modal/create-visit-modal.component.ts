@@ -79,13 +79,6 @@ export class CreateVisitModalComponent extends BaseComponent {
       return;
     }
 
-    // const doctor = {
-    //   name: this.createForm.get('doctor').value.name,
-    //   userId:  this.createForm.get('doctor').value.id
-    // };
-
-    console.log("doctor", this.createForm.get('doctor'));
-    console.log("doctor value", this.createForm.get('doctor').value);
     const createdVisit = {
       doctor: this.createForm.get('doctor').value,
       visitDate: this.createForm.get('visitDate').value

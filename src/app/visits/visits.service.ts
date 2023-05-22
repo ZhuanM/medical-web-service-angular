@@ -31,7 +31,7 @@ export class VisitsService {
   updateVisit(id: string, params: any) {
     const payload = {
       diagnosis: params.diagnosis,
-      medicaments: params.treatment,
+      treatments: params.treatment,
       sickLeave: {
         startDate: params.sickLeaveFrom,
         endDate: params.sickLeaveTo,

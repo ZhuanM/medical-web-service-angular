@@ -10,23 +10,23 @@
     </mat-form-field>
 
     <div class="mb-3" formArrayName="treatment">
-      <div *ngFor="let medicament of treatmentControls; let i = index" [formGroupName]="i">
+      <div *ngFor="let treatment of treatmentControls; let i = index" [formGroupName]="i">
         <mat-form-field>
-          <mat-label>Medicament Name</mat-label>
-          <input matInput formControlName="medicamentName" placeholder="Medicament Name">
+          <mat-label>Treatment Name</mat-label>
+          <input matInput formControlName="treatmentName" placeholder="Treatment Name">
         </mat-form-field>
         <mat-form-field>
           <mat-label>Dosage</mat-label>
           <input matInput formControlName="dosage" placeholder="Dosage">
         </mat-form-field>
-        <mat-error *ngIf="editForm.hasError('emptyMedicament') && (medicament.controls.medicamentName.touched || medicament.controls.dosage.touched)">
+        <mat-error *ngIf="editForm.hasError('emptyTreatment') && (treatment.controls.treatmentName.touched || treatment.controls.dosage.touched)">
           Either both fields must be filled, or both must be left empty.
         </mat-error>
-        <button mat-icon-button (click)="removeMedicament(i)">
+        <button mat-icon-button (click)="removeTreatment(i)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
-      <button mat-raised-button (click)="addMedicament()">Add Medicament</button>
+      <button mat-raised-button (click)="addTreatment()">Add Treatment</button>
     </div>
 
     <mat-form-field>

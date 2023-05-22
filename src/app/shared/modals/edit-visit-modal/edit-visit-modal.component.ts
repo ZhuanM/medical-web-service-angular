@@ -81,11 +81,11 @@ export class EditVisitModalComponent extends BaseComponent {
   private createTreatmentControls(): Array<UntypedFormGroup> {
     const controls: Array<UntypedFormGroup> = [];
 
-    const medicaments = this.data?.medicaments ?? [];
-    for (const medicament of medicaments) {
+    const treatments = this.data?.treatments ?? [];
+    for (const treatment of treatments) {
       const controlGroup = this.formBuilder.group({
-        medicamentName: [medicament.medicamentName ?? ''],
-        dosage: [medicament.dosage ?? ''],
+        treatmentName: [treatment.treatmentName ?? ''],
+        dosage: [treatment.dosage ?? ''],
       });
 
       controls.push(controlGroup);
@@ -94,16 +94,16 @@ export class EditVisitModalComponent extends BaseComponent {
     return controls;
   }
 
-  public addMedicament() {
+  public addTreatment() {
     const controlGroup = this.formBuilder.group({
-      medicamentName: [''],
+      treatmentName: [''],
       dosage: [''],
     });
 
     (this.editForm.get('treatment') as FormArray).push(controlGroup);
   }
 
-  public removeMedicament(index: number) {
+  public removeTreatment(index: number) {
     const treatmentArray = this.editForm.get('treatment') as FormArray;
     treatmentArray.removeAt(index);
   }
@@ -154,17 +154,17 @@ export class EditVisitModalComponent extends BaseComponent {
     const treatment = control.get('treatment') as FormArray;
 
     for (let i = 0; i < treatment.length; i++) {
-      const medicamentName = treatment.at(i).get('medicamentName');
+      const treatmentName = treatment.at(i).get('treatmentName');
       const dosage = treatment.at(i).get('dosage');
 
       // Check if both fields are empty
-      if (medicamentName && dosage && !medicamentName.value && !dosage.value) {
-        return { emptyMedicament: true };
+      if (treatmentName && dosage && !treatmentName.value && !dosage.value) {
+        return { emptyTreatment: true };
       }
 
       // Check if only one field is filled
-      if (medicamentName && dosage && (medicamentName.value || dosage.value)) {
-        if (!medicamentName.value || !dosage.value) {
+      if (treatmentName && dosage && (treatmentName.value || dosage.value)) {
+        if (!treatmentName.value || !dosage.value) {
           return { treatmentInvalid: true };
         }
       }

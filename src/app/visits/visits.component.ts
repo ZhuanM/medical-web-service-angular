@@ -76,7 +76,7 @@ export class VisitsComponent extends BaseComponent {
       filter: true,
     },
     {
-      field: 'medicaments',
+      field: 'treatments',
       headerName: 'Treatment',
       sortable: true,
       filter: true,
@@ -150,7 +150,7 @@ export class VisitsComponent extends BaseComponent {
       filter: true,
     },
     {
-      field: 'medicaments',
+      field: 'treatments',
       headerName: 'Treatment',
       sortable: true,
       filter: true,
