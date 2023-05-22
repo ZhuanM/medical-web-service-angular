@@ -65,8 +65,7 @@ export class ProfileComponent extends BaseComponent {
       this.patient$.pipe(takeUntil(this.destroyed$)).subscribe(patient => {
         if (patient) {
           this.name = patient.name;
-          // TODO change ucn
-          this.uniqueCitizenNumber = patient.ucn;
+          this.uniqueCitizenNumber = patient.uniqueCitizenNumber;
           this.gpName = patient.gp.name;
           this.healthTaxesPaidUntil = patient.healthTaxesPaidUntil;
           this.healthTaxesArePaid = hasPaidHealthTaxesForLastSixMonths(this.healthTaxesPaidUntil);
@@ -110,8 +109,7 @@ export class ProfileComponent extends BaseComponent {
       this.doctor$.pipe(takeUntil(this.destroyed$)).subscribe(doctor => {
         if (doctor) {
           this.name = doctor.name;
-          // TODO change npi
-          this.uniqueDoctorNumber = doctor.npi;
+          this.uniqueDoctorNumber = doctor.uniqueDoctorNumber;
           this.doctorSpecializations = doctor.specializations;
           this.selectedSpecializations = this.doctorSpecializations;
         }

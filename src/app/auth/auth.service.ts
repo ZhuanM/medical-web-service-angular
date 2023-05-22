@@ -38,9 +38,7 @@ export class AuthService {
         "name": name,
         "username": username,
         "password": password,
-        // TODO change "ucn" to "uniqueCitizenNumber" in back-end
-        "ucn": uniqueCitizenNumber,
-        // "uniqueCitizenNumber": uniqueCitizenNumber,
+        "uniqueCitizenNumber": uniqueCitizenNumber,
         "gp": {
           "userId": gp?.userId
         }
@@ -61,9 +59,7 @@ export class AuthService {
         "name": name,
         "username": username,
         "password": password,
-        // TODO change "npi" to "uniqueDoctorNumber" in back-end
-        "npi": uniqueDoctorNumber,
-        // "uniqueDoctorNumber": uniqueDoctorNumber,
+        "uniqueDoctorNumber": uniqueDoctorNumber,
         "specialization": specialization
       }
     )
