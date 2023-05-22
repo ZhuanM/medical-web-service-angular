@@ -9,8 +9,9 @@ import { doctor, doctorPatients, doctorVisits, healthTaxDate, patient } from './
 import { getDoctorAssignedPatients, getDoctorById, getDoctorVisits, getPatientById, updateDoctorSpecializations, updateHealthTaxDate } from './store/profile.actions';
 import { appLoading } from '../shared/loader/store/loader.actions';
 import { getSpecializations } from '../auth/store/auth.actions';
-import { specializations, user } from '../auth/store/auth.selectors';
+import { specializations } from '../auth/store/auth.selectors';
 import { hasPaidHealthTaxesForLastSixMonths } from '../shared/utility';
+import { Specialization } from '../shared/models/specialization.enum';
 
 @Component({
   selector: 'app-profile',
@@ -25,24 +26,28 @@ export class ProfileComponent extends BaseComponent {
   readonly doctor$: Observable<any> = this.store.pipe(select(doctor), takeUntil(this.destroyed$));
   readonly doctorVisits$: Observable<any> = this.store.pipe(select(doctorVisits), takeUntil(this.destroyed$));
   readonly doctorPatients$: Observable<any> = this.store.pipe(select(doctorPatients), takeUntil(this.destroyed$));
-  readonly specializations$: Observable<any> = this.store.pipe(select(specializations), takeUntil(this.destroyed$));
+  readonly specializations$: Observable<Array<Specialization>> = this.store.pipe(select(specializations), takeUntil(this.destroyed$));
 
   public role: string = localStorage.getItem("role");
   public name: string;
   public healthTaxesPaidUntil: string;
   public healthTaxesArePaid: boolean;
-  public doctorSpecializations: Array<any> = [];
+  public doctorSpecializations: Array<Specialization> = [];
   public numberOfDoctorVisits: number;
   public numberOfDoctorPatients: number;
   public doctorPatients: any;
-  public allSpecializations: any;
-  public selectedSpecializations: any;
+  public allSpecializations: Array<Specialization>;
+  public selectedSpecializations: Array<Specialization>;
   public uniqueCitizenNumber: string;
   public uniqueDoctorNumber: string;
   public gpName: string;
 
   public minDate: Date;
   public selectedDate: Date;
+
+  public get Specialization(): typeof Specialization {
+    return Specialization; 
+  }
 
   constructor(private store: Store<AppState>, private datePipe: DatePipe, private actionsSubject$: ActionsSubject) {
     super();

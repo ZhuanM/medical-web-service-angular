@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Specialization } from "src/app/shared/models/specialization.enum";
 
 export const updateHealthTaxDate = createAction(
   '[Profile Component] Update Health Tax Date',
@@ -75,7 +76,7 @@ export const updateDoctorSpecializations = createAction(
   '[Profile Component] Update Doctor Specializations',
   props<{
     id: string,
-    specializations: Array<string>
+    specializations: Array<Specialization>
   }>()
 );
 

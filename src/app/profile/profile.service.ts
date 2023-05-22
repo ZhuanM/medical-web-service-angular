@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { apiUrls } from './../shared/api-urls';
+import { Specialization } from '../shared/models/specialization.enum';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -47,7 +48,7 @@ export class ProfileService {
     )
   }
 
-  updateDoctorSpecializations(id: string, specializations: Array<string>) {
+  updateDoctorSpecializations(id: string, specializations: Array<Specialization>) {
     const payload = {
       specializations: specializations,
     };

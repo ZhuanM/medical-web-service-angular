@@ -100,7 +100,7 @@
                   <mat-label>Select Specialization</mat-label>
                   <mat-select name="specialization" formControlName="specialization" required>
                     <mat-option *ngFor="let specialization of specializations" [value]="specialization">
-                      {{specialization}}
+                      {{Specialization[specialization]}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

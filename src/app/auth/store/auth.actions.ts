@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Doctor } from 'src/app/shared/models/doctor.interface';
+import { Specialization } from 'src/app/shared/models/specialization.enum';
 import { User } from 'src/app/shared/models/user.interface';
 
 export const login = createAction(
@@ -71,7 +72,7 @@ export const getSpecializations = createAction(
 export const getSpecializationsSuccess = createAction(
   '[Auth Component] Get Specializations Success',
   props<{
-    specializations: Array<string>
+    specializations: Array<Specialization>
   }>()
 );
 

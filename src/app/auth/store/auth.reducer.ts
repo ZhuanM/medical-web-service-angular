@@ -2,6 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { User } from '../../shared/models/user.interface';
 import * as AuthActions from './auth.actions';
 import { Doctor } from 'src/app/shared/models/doctor.interface';
+import { Specialization } from 'src/app/shared/models/specialization.enum';
 
 export interface State {
   accessToken: string;
@@ -9,7 +10,7 @@ export interface State {
   isLoading: boolean;
   user: User;
   id: number;
-  specializations: Array<string>;
+  specializations: Array<Specialization>;
   doctors: Array<Doctor>;
 }
 

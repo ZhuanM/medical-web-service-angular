@@ -53,7 +53,7 @@
             <div *ngIf="doctorSpecializations" class="mb-3 fs-16">
               {{ doctorSpecializations.length == 1 ? 'Specialization: ' : doctorSpecializations.length > 1 ? 'Specializations: ' : '' }}
               <span *ngFor="let specialization of doctorSpecializations; let last = last">
-                {{ specialization }}{{ !last ? ', ' : '' }}
+                {{ Specialization[specialization] }}{{ !last ? ', ' : '' }}
               </span>
             </div>
             <div class="mb-3 fs-16">
@@ -66,12 +66,12 @@
               <mat-label>Specializations</mat-label>
               <mat-select [(ngModel)]="selectedSpecializations" multiple>
                 <mat-select-trigger>
-                  {{selectedSpecializations?.[0] || ''}}
+                  {{Specialization[selectedSpecializations?.[0]] || ''}}
                   <span *ngIf="(selectedSpecializations?.length || 0) > 1">
                     (+{{(selectedSpecializations?.length || 0) - 1}} {{selectedSpecializations?.length === 2 ? 'other' : 'others'}})
                   </span>
                 </mat-select-trigger>
-                <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization">{{specialization}}</mat-option>
+                <mat-option *ngFor="let specialization of allSpecializations" [value]="specialization">{{Specialization[specialization]}}</mat-option>
               </mat-select>
             </mat-form-field>
             <div>

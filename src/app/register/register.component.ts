@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppState } from '../shared/models/app-state.interface';
 import { Doctor } from '../shared/models/doctor.interface';
+import { Specialization } from '../shared/models/specialization.enum';
 
 @Component({
   selector: 'app-register',
@@ -17,14 +18,18 @@ import { Doctor } from '../shared/models/doctor.interface';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends BaseComponent {
-  readonly specializations$: Observable<Array<string>> = this.store.pipe(select(AuthSelectors.specializations), takeUntil(this.destroyed$));
+  readonly specializations$: Observable<Array<Specialization>> = this.store.pipe(select(AuthSelectors.specializations), takeUntil(this.destroyed$));
   readonly doctors$: Observable<Array<Doctor>> = this.store.pipe(select(AuthSelectors.doctors), takeUntil(this.destroyed$));
 
-  public specializations: Array<string> = [];
+  public specializations: Array<Specialization> = [];
   public doctors: Array<Doctor> = [];
 
   public hideRegisterPassword: boolean = true;
   public hideRegisterRepeatPassword: boolean = true;
+
+  public get Specialization(): typeof Specialization {
+    return Specialization; 
+  }
 
   public registerForm = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
