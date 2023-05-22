@@ -29,7 +29,8 @@ export class AuthService {
     password: string,
     uniqueCitizenNumber: string,
     gp: {
-      userId: string
+      userId: string,
+      name: string
     }
     ) {
     return this.http.post<any>(
@@ -40,7 +41,8 @@ export class AuthService {
         "password": password,
         "uniqueCitizenNumber": uniqueCitizenNumber,
         "gp": {
-          "userId": gp?.userId
+          "userId": gp?.userId,
+          "name": gp?.name
         }
       }
     )

@@ -107,7 +107,8 @@ export class RegisterComponent extends BaseComponent {
       const role: string = this.registerForm.get('role').value;
       if (role == "PATIENT") {
         const gp = {
-          userId: this.registerForm.get('gp').value.id
+          userId: this.registerForm.get('gp').value.id,
+          name: this.registerForm.get('gp').value.name
         };
 
         this.store.dispatch(AuthActions.registerPatient(

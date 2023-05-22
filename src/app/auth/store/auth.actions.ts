@@ -19,7 +19,8 @@ export const registerPatient = createAction(
     password: string,
     uniqueCitizenNumber: string,
     gp: {
-      userId: string
+      userId: string,
+      name: string
     }
   }>()
 );
